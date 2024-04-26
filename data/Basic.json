@@ -1,0 +1,259 @@
+{
+    "Branches": [
+        {
+            "name": "Locale branches",
+            "cmd": "git branch"
+        },
+        {
+            "name": "Locale and remote branches",
+            "cmd": "git branch -a"
+        },
+        {
+            "name": "Create",
+            "cmd": "git branch foo"
+        },
+        {
+            "name": "Create and switch",
+            "cmd": "git checkout -b foo"
+        },
+        {
+            "name": "Rename",
+            "cmd": "git branch -m foot"
+        },
+        {
+            "name": "Interlude",
+            "cmd": "./scripts/set/commit"
+        },
+        {
+            "name": "Switch",
+            "cmd": "git checkout/switch tutorial"
+        },
+        {
+            "name": "Interlude",
+            "cmd": "./scripts/set/commit"
+        },
+        {
+            "name": "Delete",
+            "cmd": "git branch -d foot"
+        },
+        {
+            "name": "Delete (force)",
+            "cmd": "git branch -D foot"
+        }
+    ],
+
+    "Status": [
+        {
+            "name": "Interlude",
+            "cmd": "./scripts/set/status"
+        },
+        {
+            "name": "Get status",
+            "cmd": "git status"
+        },
+        {
+            "name": "Short version",
+            "cmd": "git status -s"
+        }
+    ],
+
+    "Diff": [
+        {
+            "name": "Current changes",
+            "cmd": "git diff"
+        },
+        {
+            "name": "External viewer",
+            "cmd": "git difftool -t p4merge"
+        },
+        {
+            "name": "Diff between commits/branches/tags",
+            "cmd": "git diff <from>..<to>"
+        }
+    ],
+
+    "Remove": [
+        {
+            "name": "Remove a file",
+            "cmd": "git rm <file>"
+        }
+    ],
+
+    "Clean": [
+        {
+            "name": "Remove untracked files and directories",
+            "cmd": "git clean -fd"
+        }
+    ],
+
+    "Reset": [
+        {
+            "name": "Hard reset everything",
+            "cmd": "git reset --hard"
+        },
+        {
+            "name": "Specify the reference",
+            "cmd": "git reset --hard <sha1>"
+        },
+        {
+            "name": "Undo last commit",
+            "cmd": "git reset --soft HEAD~1"
+        }
+    ],
+
+    "Commit": [
+        {
+            "name": "Create commit with editor",
+            "cmd": "git commit <file1> <file2> ..."
+        },
+        {
+            "name": "Commit all",
+            "cmd": "git commit -a"
+        },
+        {
+            "name": "Commit all with commit message",
+            "cmd": "git commit -a -m \"wip: bla bla\""
+        }
+    ],
+
+    "Push": [
+        {
+            "name": "Push all new commits",
+            "cmd": "git push"
+        },
+        {
+            "name": "Push force (when amending for example)",
+            "cmd": "git push --force"
+        },
+        {
+            "name": "Be nice",
+            "cmd": "git push --force-with-lease"
+        },
+        {
+            "name": "Remotes",
+            "cmd": "git remote -v"
+        },
+        {
+            "name": "Current upstream",
+            "cmd": "git branch -vv"
+        },
+        {
+            "name": "Push new branch",
+            "cmd": "git push -u origin <branch>"
+        },
+        {
+            "name": "Create local repository",
+            "cmd": "mkdir -p /tmp/gitutor-backup"
+        },
+        {
+            "name": "Add remote",
+            "cmd": "git remote add backup /tmp/gitutor-backup"
+        },
+        {
+            "name": "Push to backup remote",
+            "cmd": "push -u backup tutorial"
+        }
+    ],
+
+    "Log": [
+        {
+            "name": "Basic",
+            "cmd": "git log"
+        },
+        {
+            "name": "Short version",
+            "cmd": "git log --oneline --decorate -20"
+        },
+        {
+            "name": "Verbose version",
+            "cmd": "git log --pretty=format:'%C(yellow)[%H]%Creset %C(green)[%ai] %C(blue)[%an]%Creset - %s' --abbrev-commit -20"
+        }
+    ],
+
+    "Checkout": [
+        {
+            "name": "Interlude",
+            "cmd": "./scripts/set/status"
+        },
+        {
+            "name": "Reset file(s) state",
+            "cmd": "git checkout src/chaos.js"
+        },
+        {
+            "name": "Reset all",
+            "cmd": "git checkout ."
+        },
+        {
+            "name": "For deleted file",
+            "cmd": "git checkout HEAD LICENSE"
+        },
+        {
+            "name": "For branch",
+            "cmd": "git checkout <branch/tag>"
+        },
+        {
+            "name": "For commit",
+            "cmd": "git checkout <ref>"
+        }
+    ],
+
+    "Fetch/pull": [
+        {
+            "name": "Interlude",
+            "cmd": "# push a branch from another location"
+        },
+        {
+            "name": "Fetch only",
+            "cmd": "git fetch"
+        },
+        {
+            "name": "Update current branch",
+            "cmd": "git pull"
+        },
+        {
+            "name": "Interlude",
+            "cmd": "# push a tag from another location"
+        },
+        {
+            "name": "With tags",
+            "cmd": "git pull --tags"
+        },
+        {
+            "name": "With clean",
+            "cmd": "git pull --prune"
+        }
+    ],
+
+    "Rebase/merge": [
+        {
+            "name": "Rebase current onto a branch",
+            "cmd": "git rebase <branch>"
+        },
+        {
+            "name": "Merge a branch into current",
+            "cmd": "git merge <branch>"
+        }
+    ],
+
+    "Cherry-pick": [
+        {
+            "name": "Pick a commit",
+            "cmd": "git cherry-pick <sha1>"
+        }
+    ],
+
+    "Conflicts": [
+        {
+            "name": "Interlude",
+            "cmd": "./scripts/set/conflicts"
+        },
+        {
+            "name": "With default tool",
+            "cmd": "git mergetool"
+        },
+        {
+            "name": "Specify the tool",
+            "cmd": "git mergetool -t p4merge"
+        }
+    ]
+}

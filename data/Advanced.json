@@ -1,0 +1,193 @@
+{
+    "Blame": [
+        {
+            "name": "Find out which colleague will be fired",
+            "cmd": "git blame <file>"
+        },
+        {
+            "name": "Choose lines",
+            "cmd": "git blame <file> -L <from>,<to>"
+        }
+    ],
+
+    "Stash": [
+        {
+            "name": "Interlude",
+            "cmd": ":> ./src/chaos.js"
+        },
+        {
+            "name": "List stashes",
+            "cmd": "git stash list"
+        },
+        {
+            "name": "Push in stash",
+            "cmd": "git stash push"
+        },
+        {
+            "name": "Pop/apply",
+            "cmd": "git stash pop/apply"
+        },
+        {
+            "name": "With message",
+            "cmd": "git stash push -m \"bla\""
+        },
+        {
+            "name": "Clear",
+            "cmd": "git stash clear"
+        }
+    ],
+
+    "Revert": [
+        {
+            "name": "Interlude",
+            "cmd": "./scripts/set/commit"
+        },
+        {
+            "name": "Revert a commit",
+            "cmd": "git revert <sha1>"
+        }
+    ],
+
+    "Amend": [
+        {
+            "name": "Amend last commit",
+            "cmd": "git commit --amend <file>"
+        },
+        {
+            "name": "All modifications",
+            "cmd": "git commit --amend -a"
+        }
+    ],
+
+    "Interactive rebase": [
+        {
+            "name": "Run interactive rebase",
+            "cmd": "git rebase -i <sha1>"
+        }
+    ],
+
+    "Fixup": [
+        {
+            "name": "Commit a fixup",
+            "cmd": "git commit -a/<file> --fixup <sha1>"
+        },
+        {
+            "name": "Autosquash rebase",
+            "cmd": "git rebase -i --autosquash <sha1>"
+        }
+    ],
+
+    "Tag": [
+        {
+            "name": "Create a tag",
+            "cmd": "git tag 1.0.0"
+        },
+        {
+            "name": "List tags",
+            "cmd": "git tag --list"
+        },
+        {
+            "name": "Push tags",
+            "cmd": "git push --tags"
+        },
+        {
+            "name": "Delete a local tag",
+            "cmd": "git tag -d 1.0.0"
+        },
+        {
+            "name": "Delete a remote tag",
+            "cmd": "git push -d origin 1.0.0"
+        }
+    ],
+
+    "Config": [
+        {
+            "name": "Local config: .git/config",
+            "cmd": "git config user.email"
+        },
+        {
+            "name": "Global config: ~/.gitconfig",
+            "cmd": "git config --global user.email"
+        },
+        {
+            "name": "Editor",
+            "cmd": "git config core.editor \"code --wait\""
+        },
+        {
+            "name": "Merge tool",
+            "cmd": "git config merge.tool meld"
+        },
+        {
+            "name": "Alias",
+            "cmd": "git config alias.amend \"commit --amend\""
+        },
+        {
+            "name": "Interlude",
+            "cmd": "Use shell aliases instead"
+        }
+    ],
+
+    "Gitignore": [
+        {
+            "name": "Edit global ignore file",
+            "cmd": "vim .gitignore"
+        },
+        {
+            "name": "Regex, subdirectories",
+            "cmd": "..."
+        }
+    ],
+    
+    "Submodules": [
+        {
+            "name": "Add a submodule",
+            "cmd": "git submodule add git@github.com:climateseed/cs-core-backend-rs.git thirdparties/cs-core"
+        },
+        {
+            "name": "Update (with init if needed)",
+            "cmd": "git submodule update --init"
+        },
+        {
+            "name": "List",
+            "cmd": "git submodules"
+        },
+        {
+            "name": "Change revision",
+            "cmd": "cd thirdparties/cs-core; git checkout <sha1>; cd -"
+        }
+    ],
+
+    "Subtree": [
+        {
+            "name": "Add a subtree",
+            "cmd": "git subtree add --prefix trees/cs-core git@github.com:climateseed/cs-core-backend-rs.git master"
+        },
+        {
+            "name": "Pull changes",
+            "cmd": "git subtree pull --prefix trees/cs-core git@github.com:climateseed/cs-core-backend-rs.git master"
+        },
+        {
+            "name": "Using remote 1/2",
+            "cmd": "git remote add -f cs-core git@github.com:climateseed/cs-core-backend-rs.git"
+        },
+        {
+            "name": "Using remote 2/2",
+            "cmd": "git subtree pull --prefix trees/cs-core cs-core master"
+        },
+        {
+            "name": "Push back modification",
+            "cmd": "git subtree push --prefix trees/cs-core cs-core master"
+        }
+    ],
+
+    "Reflog": [
+        {
+            "name": "Interlude",
+            "cmd": "git reset --hard <old-sha1>"
+        },
+        {
+            "name": "Show reflog",
+            "cmd": "git reflog"
+        }
+    ]
+}

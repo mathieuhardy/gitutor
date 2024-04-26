@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source ./scripts/git
+
+TAG_ID=$(( TAG_ID + 1 ))
+
+set_tag "v0.0.${TAG_ID}"
+push_tags
+
+set_tag_id ${TAG_ID}

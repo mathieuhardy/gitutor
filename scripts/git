@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+COMMIT_ID_FILE=/tmp/gitutor-commit-id
+if ! test -e ${COMMIT_ID_FILE}
+then
+    echo 0 > ${COMMIT_ID_FILE}
+fi
+
+TAG_ID_FILE=/tmp/gitutor-tag-id
+if ! test -e ${TAG_ID_FILE}
+then
+    echo 0 > ${TAG_ID_FILE}
+fi
+
+COMMIT_ID=$(cat ${COMMIT_ID_FILE})
+TAG_ID=$(cat ${TAG_ID_FILE})
+
+function set_commit_id() {
+    echo ${1} > ${COMMIT_ID_FILE}
+}
+
+function set_tag_id() {
+    echo ${1} > ${TAG_ID_FILE}
+}
+
+function hard_reset() {
+    git reset --hard 1>/dev/null 2>&1
+
+    echo "hard reset... done"
+}
+
+function create_branch() {
+    git branch ${1} 1>/dev/null 2>&1
+
+    echo "create branch ${1}... done"
+}
+
+function delete_branch() {
+    git branch -D ${1} 1>/dev/null 2>&1
+    git push origin -d ${1} 1>/dev/null 2>&1
+
+    echo "delete branch ${1}... done"
+}
+
+function switch_to_branch() {
+    git checkout ${1} 1>/dev/null 2>&1
+
+    echo "switch to branch ${1}... done"
+}
+
+function push_branch() {
+    git push -u origin "${1}" 1>/dev/null 2>&1
+
+    echo "branch ${1} pushed... done"
+}
+
+function pull() {
+    git pull --rebase --tags --prune 1>/dev/null 2>&1
+
+    echo "pull... done"
+}
+
+function add_file() {
+    git add ${1} 1>/dev/null 2>&1
+
+    echo "file ${1} added... done"
+}
+
+function add_all() {
+    git add -A 1>/dev/null 2>&1
+
+    echo "files added... done"
+}
+
+function commit_file() {
+    git commit ${1} -m "${2}" 1>/dev/null 2>&1
+
+    echo "file commited... done"
+}
+
+function commit_all() {
+    git commit -a -m "${1}" 1>/dev/null 2>&1
+
+    echo "files commited... done"
+}
+
+function set_tag() {
+    git tag ${1}
+}
+
+function push_tags() {
+    git push --tags
+}
+
+function add_file_content() {
+    file=${1}
+    count=${2}
+    i=0
+
+    while [ ${i} -lt ${count} ]
+    do
+        echo "line ${i}" >> "${file}"
+        ((i++))
+    done
+}

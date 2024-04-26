@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source ./scripts/git
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+./scripts/set/commit
+
+push_branch ${CURRENT_BRANCH}

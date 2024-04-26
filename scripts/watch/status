@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+watch -t -c -n 0.3 git status

@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+touch .env
+
+touch .env.sample
+git add .env.sample 1>/dev/null 2>&1
+
+git rm LICENSE 1>/dev/null 2>&1
+
+git mv README.md RTFM.md
+
+echo "\nconsole.log("choucroute");" >> ./src/chaos.js
+sed -i .bak '5,10 d' ./src/crap.js
+rm ./src/crap.js.bak

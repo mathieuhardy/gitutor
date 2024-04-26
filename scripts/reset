@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+source ./scripts/git
+
+# Clean repo
+hard_reset
+rm -rf /tmp/gitutor-*
+
+switch_to_branch "main"
+
+for branch in $(git branch | grep -v main)
+do
+    delete_branch "${branch}"
+done
+
+pull
+
+# Create base branch with commits
+create_branch "tutorial"
+switch_to_branch "tutorial"
+
+cp -rf ./data/src ./src
+
+add_all
+commit_all "wakey, wakey, eggs and bakey"
+
+push_branch "tutorial"
+
+# Configure environment
+git config color.log always
+git config color.status always

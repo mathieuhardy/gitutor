@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+source ./scripts/git
+
+COMMIT_ID=$(( COMMIT_ID + 1 ))
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CONFLICTS_BRANCH="conflicts"
+
+# Create branch and make some modifications
+create_branch ${CONFLICTS_BRANCH}
+switch_to_branch ${CONFLICTS_BRANCH}
+
+cat <<EOF > src/chaos.js
+Array.prototype.slice.call(document.querySelectorAll('*')).forEach(el => {
+  el.style.top = Math.random() * window.innerHeight + 'px'
+  el.style.left = Math.random() * window.innerWidth + 'em'
+})
+EOF
+
+commit_all "fix: conflict ${COMMIT_ID}"
+push_branch ${CONFLICTS_BRANCH}
+
+set_commit_id ${COMMIT_ID}
+
+# Go back to previous branch and make some modifications on the same file
+switch_to_branch ${CURRENT_BRANCH}
+
+cat <<EOF > src/chaos.js
+Array.prototype.slice.call(document.querySelectorAll('*')).forEach(el => {
+  el.style.position = 'absolute'
+  el.style.top = Math.random() * window.innerHeight + 'px'
+  el.style.left = Math.random() * window.innerWidth + 'rem'
+})
+EOF
+
+COMMIT_ID=$(( COMMIT_ID + 1 ))
+commit_all "fix: conflict ${COMMIT_ID}"
+push_branch ${CURRENT_BRANCH}
+
+set_commit_id ${COMMIT_ID}
+
+# Go back to branch
+switch_to_branch ${CONFLICTS_BRANCH}

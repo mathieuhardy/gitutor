@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import pynput
+import sys
+
+def display(commands, cmd_index):
+    os.system("clear")
+
+    spacing = "  "
+
+    if cmd_index == -1:
+        print("\033[43m\033[1;30m Libérés, délivrés... \033[0m")
+        return
+
+    if cmd_index > 0:
+        previous = commands[cmd_index - 1]
+        previous_title = previous["module"] + " > " + previous["category"] + " > " + previous["command_name"]
+    else:
+        previous_title = ''
+
+    if cmd_index < (len(commands) - 1):
+        next = commands[cmd_index + 1]
+        next_title = next["module"] + " > " + next["category"] + " > " + next["command_name"]
+    else:
+        next_title = ''
+
+    current = commands[cmd_index]
+    current_title = current["module"] + " > " + current["category"] + " > " + current["command_name"]
+
+    max_length = max(len(current_title), max(len(previous_title), len(next_title)))
+    offset_previous = ' ' * (max_length - len(previous_title))
+    offset_current = ' ' * (max_length - len(current_title))
+    offset_next = ' ' * (max_length - len(next_title))
+
+    print("\033[47m\033[1;30m" + spacing + ' ' * max_length + spacing + "\033[0m")
+
+    print("\033[47m\033[30m" + spacing + previous_title + offset_previous + spacing + "\033[0m")
+    print("\033[47m\033[1;30m" + spacing + "\033[47m\033[1;35m" + current["module"] + " > " + "\033[47m\033[1;34m" + current["category"] + " > " + "\033[47m\033[1;32m" + current["command_name"] + "\033[47m\033[1;30m" + offset_current + spacing + "\033[0m")
+    print("\033[47m\033[30m" + spacing + next_title + offset_next + spacing + "\033[0m")
+    
+    print("\033[47m\033[1;30m" + spacing + ' ' * max_length + spacing + "\033[0m")
+
+    print("\n")
+    print("\033[1;32m" + "  $ " + "\033[0m" + current["command"])
+
+def process(commands):
+    cmd_index = 0
+    cmd_length = len(commands)
+
+    display(commands, cmd_index)
+
+    with pynput.keyboard.Events() as events:
+        while True:
+            event = events.get()
+
+            if not event:
+                continue
+
+            if type(event) is not pynput.keyboard.Events.Press:
+                continue
+
+            if event.key == pynput.keyboard.KeyCode.from_char('Q'):
+                sys.exit(0)
+
+            if event.key == pynput.keyboard.KeyCode.from_char('>'):
+                cmd_index += 1
+
+                if cmd_index >= cmd_length:
+                    cmd_index = -1
+
+                display(commands, cmd_index)
+            elif event.key == pynput.keyboard.KeyCode.from_char('<'):
+                cmd_index -= 1
+
+                if cmd_index <= -1:
+                    cmd_index = 0
+
+                display(commands, cmd_index)
+
+def to_commands(module, categories):
+    commands = []
+
+    for cat in categories:
+        for cmd in categories[cat]:
+            commands.append({
+                "module": module,
+                "category": cat,
+                "command_name": cmd["name"],
+                "command": cmd["cmd"]
+            })
+
+    return commands
+
+def main():
+    if len(sys.argv) != 2:
+        print("Missing module name")
+        sys.exit(1)
+
+    module = sys.argv[1]
+
+    with open(f"data/{module}.json", "r") as f:
+        data = json.load(f)
+        commands = to_commands(module, data)
+        process(commands)
+
+if __name__ == "__main__":
+    main()
